@@ -8,6 +8,8 @@ info:
   description: kpt package for provisioning namespace
 pipeline:
   mutators:
+    - image: gcr.io/kpt-fn/apply-setters:v0.2.0
+      configPath: setters.yaml
     - image: gcr.io/kpt-fn/set-namespace:v0.4.1
       configPath: package-context.yaml
     - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
