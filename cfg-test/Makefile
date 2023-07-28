@@ -29,6 +29,16 @@ reset-back-force-delete-replace:
 	kpt pkg update test-pkg@$(INITIAL_NO_FUNCTION_NAMES) --strategy force-delete-replace
 	cat test-pkg/Kptfile
 
+.PHONY: show-versions
+show-versions:
+	@echo "----------------------------"
+	@echo ">>>> Showing version $(ADDED_FUNCTION_NAMES) (aka. old version)"
+	git show $(ADDED_FUNCTION_NAMES):../pkgtst/Kptfile
+	@echo "----------------------------"
+	@echo ">>>> Showing version $(ADDED_ANOTHER_NAMED_FUNCTION) (aka. new version)"
+	git show $(ADDED_ANOTHER_NAMED_FUNCTION):../pkgtst/Kptfile
+	@echo "----------------------------"
+	git diff $(ADDED_FUNCTION_NAMES)..$(ADDED_ANOTHER_NAMED_FUNCTION)
 
 .PHONY: bootstrap-named
 bootstrap-named:
@@ -38,6 +48,11 @@ bootstrap-named:
 .PHONY: update-named
 update-named:
 	kpt pkg update test-pkg@$(ADDED_ANOTHER_NAMED_FUNCTION)
+	cat test-pkg/Kptfile
+
+.PHONY: update-named-w-force-delete-replace
+update-named-w-force-delete-replace:
+	kpt pkg update test-pkg@$(ADDED_ANOTHER_NAMED_FUNCTION) --strategy force-delete-replace
 	cat test-pkg/Kptfile
 
 .PHONY: reset-back-named
