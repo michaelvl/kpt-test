@@ -133,6 +133,13 @@ upstream:
     directory: /pkgtst
     ref: d60dafa
   updateStrategy: force-delete-replace
+upstreamLock:
+  type: git
+  git:
+    repo: git@github.com:michaelvl/kpt-test
+    directory: /pkgtst
+    ref: d60dafa
+    commit: d60dafa
 ...
 pipeline:
   mutators:
@@ -142,9 +149,13 @@ pipeline:
     - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
       configPath: update-rolebinding.yaml
       name: update role binding
+  validators:
+    - image: gcr.io/kpt-fn/kubeval:v0.3
+      name: validation
 ```
 
-The expected result was the upstream version of `Kptfile` at `d60dafa`:
+The expected result was the upstream version of `Kptfile` at
+`d60dafa`, except for fields related to git (e.g. `upstream` and `upstreamLock`):
 
 ```
 git show d60dafa:../pkgtst/Kptfile
