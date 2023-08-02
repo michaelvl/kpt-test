@@ -23,3 +23,5 @@ pipeline:
   validators:
     - name: validation
       image: gcr.io/kpt-fn/kubeval:v0.3
+      configMap:
+        ignore_missing_schemas: "true"
