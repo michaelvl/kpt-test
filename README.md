@@ -8,7 +8,7 @@ A `kpt pkg get` followed by a `kpt pkg updata --strategy
 force-delete-replace` leaves the old version of `Kptfile` and not as
 expected the version from the update.
 
-Tested using `kpt` version `1.0.0-beta.38`.
+Tested using `kpt` version `1.0.0-beta.38` and `1.0.0-beta.43`.
 
 ## Description
 
@@ -92,7 +92,7 @@ index a30151f..5b28a9b 100644
        configPath: update-rolebinding.yaml
 ```
 
-Next, we get the 'old' version of the package:
+Initially we get the 'old' version of the package (will run `kpt pkg get ...`):
 
 ```
 make bootstrap-named
@@ -154,8 +154,8 @@ pipeline:
       name: validation
 ```
 
-The expected result was the upstream version of `Kptfile` at
-`d60dafa`, except for fields related to git (e.g. `upstream` and `upstreamLock`):
+**The expected result was the upstream version of `Kptfile` at
+`d60dafa`, except for fields related to git (e.g. `upstream` and `upstreamLock`)**:
 
 ```
 git show d60dafa:../pkgtst/Kptfile
