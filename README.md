@@ -4,7 +4,7 @@ This repo reproduces the bug initially described in the [kpt Slack](https://kube
 
 ## Summary
 
-A `kpt pkg get` followed by a `kpt pkg updata --strategy
+A `kpt pkg get` followed by a `kpt pkg update --strategy
 force-delete-replace` leaves the old version of `Kptfile` and not as
 expected the version from the update.
 
